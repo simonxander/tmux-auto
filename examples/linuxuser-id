@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ "$#" -eq 0 ]; then
+	# prompt username
+	tmux command -I admin -p "Username: " "run '${BASH_SOURCE[0]} \"%1\"'"
+else
+	tmux send-key -t "${PANE_ID}" C-c
+	tmux send-key -t "${PANE_ID}" 'id ' $1 Enter
+fi

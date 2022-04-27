@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+tmux send-key -t "${PANE_ID}" 'ls -l' Enter

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+tmux send-key -t "${PANE_ID}" C-c
+tmux send-key -t "${PANE_ID}" 'grep -q track_activities /etc/postgresql/postgresql.conf && '
+tmux send-key -t "${PANE_ID}" -l 'sed -i "s/track_activities.*/track_activities = on/" /etc/postgresql/postgresql.conf || '
+tmux send-key -t "${PANE_ID}" -l 'echo "track_activities = on" >> /etc/postgresql/postgresql.conf'
+tmux send-key -t "${PANE_ID}" Enter
+tmux send-key -t "${PANE_ID}" 'psql -U postgres -c "SELECT pg_reload_conf();"' Enter
